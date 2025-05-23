@@ -311,21 +311,34 @@ function renderArtists(results) {
     for (let i = 0; i < results.length; i++) {
         const artist = results[i];
         sessionStorage.setItem(artist.name, JSON.stringify(artist.guitars))
-        innerContent += `
-        <div class="container p-3 box mb-5">
-            <h3 class="mb-3">${artist.name}</h3>
-            <hr>
+        innerContent +=
+            `
+            <div class="box container mb-5 bg-dark">
+                        <div class="row">
+                <div class="container p-1 bg-transparent">
+                    <h3 class="mb-3">${artist.name}</h3>
+                    <hr>
                     <div class="d-lg-flex d-block">
-                <img width="100%" src="${artist.photos[0].url}" alt="">
-                <div class="p-3">
-                    <p class="text-light">
+                    <img width="30%" src="${artist.photos[0].url}" alt="">
+                    <div class="p-3">
+                        <p class="text-light">
                         ${artist.about}
-                    </p>
-                    <a class="btn btn-sm btn-dark" onclick="showSignatures('${artist.name}')">View Guitars</a>
+                        </p>
+                    </div>
+                    </div>
                 </div>
+                </div>
+                                        <hr>
+
+                        <button onclick="showSignatures('${artist.name}')" class='btn btn-outline-dark text-light mt-1'>View Signature Models</button
+                <div class="row" id="${artist.name}_accordion">
+                        <div class="centered container p-5" id="${artist.name}_signatures">
+                        </div>
+    
+                </div>
+ 
             </div>
-        </div>
-        `;
+            `;
 
     }
 
@@ -334,8 +347,10 @@ function renderArtists(results) {
 
 
 async function showSignatures(target) {
-    let div = document.getElementById('signatures');
+    let div = document.getElementById(`${target}_signatures`);
     let guitarIDs = JSON.parse(sessionStorage.getItem(target));
+
+    div.innerHTML = spinner;
 
     let htmlContent = '';
     for (let i = 0; i < guitarIDs.length; i++) {
@@ -350,7 +365,7 @@ async function showSignatures(target) {
         let guitar = request.data;
         console.log(guitar);
         htmlContent += `
-        <div class="card container box mb-5 text-light">
+        <div class="card container mb-5 text-light bg-transparent">
             <h3 class="mb-3">${guitar.title}</h3>
             <div class="container">
                 <div id="carousel-${id}" class="carousel slide" data-bs-ride="carousel">
@@ -381,23 +396,8 @@ async function showSignatures(target) {
     `;
     }
 
-
-    modalHTML =
-        `
-            <div class="modal fade bg-dark" id="guitarModal" tabindex="-1" role="dialog" aria-labelledby="guitarModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-md">
-                    <div class="modal-content bg-transparent border-0">
-                        ${htmlContent}
-                    </div>
-                </div>
-            </div>
-        `;
-
-    div.innerHTML = modalHTML;
-    var myModal = new bootstrap.Modal(document.getElementById('guitarModal'));
-    myModal.show();
-
+    div.innerHTML = htmlContent;
+    accordion.style.visibility = "visible";
 
 }
 
