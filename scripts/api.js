@@ -239,7 +239,7 @@ function renderGuitars(results) {
     for (let i = 0; i < results.length; i++) {
         let guitar = results[i];
         innerContent += `
-            <div class="container-fluid mb-4">
+            <div class="container mb-4" style="width:100%;">
                 <div class="box card bg-transparent text-light" style="height: 100%;">
                   <div class="card-header">${guitar.title}</div>
 
@@ -316,7 +316,7 @@ function renderArtists(results) {
             <h3 class="mb-3">${artist.name}</h3>
             <hr>
                     <div class="d-lg-flex d-block">
-                <img height="350px" src="${artist.photos[0].url}" alt="">
+                <img width="100%" src="${artist.photos[0].url}" alt="">
                 <div class="p-3">
                     <p class="text-light">
                         ${artist.about}
