@@ -239,11 +239,11 @@ function renderGuitars(results) {
     for (let i = 0; i < results.length; i++) {
         let guitar = results[i];
         innerContent += `
-            <div class="container mb-4" style="width:100%;">
+            <div class="container mb-4">
                 <div class="box card bg-transparent text-light" style="height: 100%;">
                   <div class="card-header">${guitar.title}</div>
 
-                    <img class="card-img-top centered" src="${guitar.photos[0].url}" width=25% alt="Card image cap">
+                    <img class="card-img-top centered" src="${guitar.photos[0].url}" width=50% alt="Card image cap">
                     <div class="card-body">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal${i}" class="card-link text-light">View</a>
                     </div>
