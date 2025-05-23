@@ -83,11 +83,9 @@ ul {
 
 .active {
     font-size: larger;
-    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     font-weight: bolder;
     position: relative;
     z-index: 1;
-    border-radius: 10px;
 }
 
 .box {
