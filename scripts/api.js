@@ -7,7 +7,7 @@ fetchBlog();
 
 
 async function fetchGuitars() {
-    guitars.innerHTML = spinner;
+    guitars.innerHTML = `<div class="container centered p-5">${spinner}</div>`;
     const url = "https://api.baserow.io/api/database/rows/table/548154/?user_field_names=true";
     let request = axios({
         method: "GET",
@@ -22,9 +22,9 @@ function parseRtf(rtfText) {
     let html = rtfText;
 
     // Headings
-    html = html.replace(/^###\s+(.*)/gm, '<h3 class="p-3">$1</h3>');
-    html = html.replace(/^##\s+(.*)/gm, '<h2 class="p-3">$1</h2>');
-    html = html.replace(/^#\s+(.*)/gm, '<h1 class="p-3">$1</h1>');
+    html = html.replace(/^###\s+(.*)/gm, '<h5 class="p-3">$1</h3>');
+    html = html.replace(/^##\s+(.*)/gm, '<h4 class="p-3">$1</h2>');
+    html = html.replace(/^#\s+(.*)/gm, '<h3 class="p-3">$1</h1>');
 
     // Bold
     html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -239,48 +239,47 @@ function renderGuitars(results) {
     for (let i = 0; i < results.length; i++) {
         let guitar = results[i];
         innerContent += `
-            <div class="container mb-4">
-                <div class="box card bg-transparent text-light" style="height: 100%;">
-                  <div class="card-header">${guitar.title}</div>
-
-                    <img class="card-img-top centered" src="${guitar.photos[0].url}" width=50% alt="Card image cap">
-                    <div class="card-body">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal${i}" class="card-link text-light">View</a>
-                    </div>
-                </div>
+            <div class="box card bg-dark text-light mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal${i}" style="height: 100%;">
+                <div class="card-header">${guitar.title}</div>
+                <img class="card-img-top centered" src="${guitar.photos[0].url}" width=50% alt="Card image cap">
             </div>
-            
-            <!-- Modal -->
-            <div class="modal fade bg-dark bd-example-modal-lg" id="exampleModal${i}" tabindex="-1" aria-labelledby="exampleModalLabel${i}" aria-hidden="true">
+            <div class="modal fade bg-transparent bd-example-modal-lg" id="exampleModal${i}" tabindex="-1"
+                aria-labelledby="exampleModalLabel${i}" aria-hidden="true">
                 <div class="box modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content bg-transparent border-0">
                         <div class="modal-header text-light">
                             <h5 class="modal-title" id="exampleModalLabel${i}">${guitar.title}</h5>
-                            <button type="button" class="btn-close btn-outline-light" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-light">
-                            <div class='container'>
-                                <div class="centered">
-                                    <div id="carouselModal-${i}" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            ${guitar.photos.map((photo, index) => `
-                                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                                    <img src="${photo.url}" class="d-block w-100" alt="Guitar Image" width=25%>
-                                                </div>
-                                            `).join('')}
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-${i}" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon"></span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-${i}" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon"></span>
-                                        </button>
+                        <div class="modal-body text-light" style="font-size:smaller;">
+                            <div class="centered">
+                                <div id="carouselModal-${i}" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        ${guitar.photos.map((_, index) =>
+            `<button type="button" data-bs-target="#carouselModal-${i}" data-bs-slide-to="${index}" class="carousel-indicator${index === 0 ? ' active' : ''}"></button>`
+        ).join('')}
                                     </div>
+                                    <div class="carousel-inner">
+                                        ${guitar.photos.map((photo, index) => `
+                                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                                <img src="${photo.url}" class="d-block w-100" alt="Guitar Photo" width=25%>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselModal-${i}"
+                                        data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselModal-${i}"
+                                        data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
                                 </div>
-                                <hr>
-                                ${parseRtf(guitar.details)}
                             </div>
+                            <hr>
+                            ${parseRtf(guitar.details)}
                         </div>
+                            <button href="#" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+
                     </div>
                 </div>
             </div>
@@ -292,7 +291,7 @@ function renderGuitars(results) {
 
 
 async function fetchArtists() {
-    artists.innerHTML = spinner;
+    artists.innerHTML = `<div class="container centered p-5">${spinner}</div>`;
     const url = "https://api.baserow.io/api/database/rows/table/548156/?user_field_names=true";
     let request = axios({
         method: "GET",
@@ -305,7 +304,7 @@ async function fetchArtists() {
 }
 
 
-function renderArtists(results) {
+async function renderArtists(results) {
     let artists = document.getElementById("artists");
     let innerContent = "";
     for (let i = 0; i < results.length; i++) {
@@ -313,31 +312,29 @@ function renderArtists(results) {
         sessionStorage.setItem(artist.name, JSON.stringify(artist.guitars))
         innerContent +=
             `
-            <div class="box container mb-5 bg-dark">
-                        <div class="row">
-                <div class="container p-1 bg-transparent">
-                    <h3 class="mb-3">${artist.name}</h3>
-                    <hr>
-                    <div class="d-lg-flex d-block">
-                    <img width="30%" src="${artist.photos[0].url}" alt="">
-                    <div class="p-3">
-                        <p class="text-light">
-                        ${artist.about}
-                        </p>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                                        <hr>
+<div class="card box bg-dark">
+    <img class="card-img-top img-fluid" src="${artist.photos[0].url}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title text-dark-emphasis">${artist.name}</h5>
+        <p class="card-text">
+            ${parseRtf(artist.about)}
+        </p>
+        <button class='btn btn-outline-dark text-light mt-1' data-bs-toggle="modal"
+            data-bs-target="#artist_modal${i}">View Signature
+            Models</button>
+    </div>
+</div>
 
-                        <button onclick="showSignatures('${artist.name}')" class='btn btn-outline-dark text-light mt-1'>View Signature Models</button
-                <div class="row" id="${artist.name}_accordion">
-                        <div class="centered container p-5" id="${artist.name}_signatures">
-                        </div>
-    
-                </div>
- 
-            </div>
+
+<div class="modal fade bg-transparent bd-example-modal-lg" id="artist_modal${i}" tabindex="-1"
+    aria-labelledby="exampleModalLabel${i}" aria-hidden="true">
+    <div class="box modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-transparent border-0">
+            ${await showSignatures(artist.name)}
+            <button href="#" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
             `;
 
     }
@@ -347,11 +344,7 @@ function renderArtists(results) {
 
 
 async function showSignatures(target) {
-    let div = document.getElementById(`${target}_signatures`);
     let guitarIDs = JSON.parse(sessionStorage.getItem(target));
-
-    div.innerHTML = spinner;
-
     let htmlContent = '';
     for (let i = 0; i < guitarIDs.length; i++) {
         let id = guitarIDs[i].id;
@@ -364,47 +357,51 @@ async function showSignatures(target) {
         })
         let guitar = request.data;
         console.log(guitar);
-        htmlContent += `
-        <div class="card container mb-5 text-light bg-transparent">
-            <h3 class="mb-3">${guitar.title}</h3>
-            <div class="container">
-                <div id="carousel-${id}" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        ${guitar.photos.map((_, index) =>
-            `<button type="button" data-bs-target="#carousel-${id}" data-bs-slide-to="${index}" class="carousel-indicator${index === 0 ? ' active' : ''}"></button>`
-        ).join('')}
-                    </div>
-                    <div class="carousel-inner">
-                        ${guitar.photos.map((photo, index) => `
-                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                <img src="${photo.url}" class="d-block w-100 img-fluid" height=350px alt="Guitar Photo" />
-                            </div>
-                        `).join('')}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${id}" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-${id}" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
+        htmlContent +=
+            `
+        <div class="card mb-3 bg-dark">
+    <div class="container">
+        <div id="carousel-${id}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                ${guitar.photos.map((_, index) =>
+                `<button type="button" data-bs-target="#carousel-${id}" data-bs-slide-to="${index}"
+                    class="carousel-indicator${index === 0 ? ' active' : ''}"></button>`
+            ).join('')}
+            </div>
+            <div class="carousel-inner">
+                ${guitar.photos.map((photo, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${photo.url}" class="card-img-top img-fluid" alt="Guitar Photo" />
                 </div>
+                `).join('')}
             </div>
-            <div class="container text-start">
-                ${clearRtf(guitar.details)}
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${id}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${id}" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-    `;
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title text-dark-emphasis">${guitar.title}</h5>
+        <div class="text-light">
+            ${clearRtf(guitar.details)}
+        </div>
+    </div>
+</div>
+        `;
     }
 
-    div.innerHTML = htmlContent;
-    accordion.style.visibility = "visible";
+    return htmlContent;
 
 }
 
 
 
 async function fetchBlog() {
-    artists.innerHTML = spinner;
+    artists.innerHTML = `<div class="container centered p-5">${spinner}</div>`;
     const url = "https://api.baserow.io/api/database/rows/table/548155/?user_field_names=true";
     let request = axios({
         method: "GET",

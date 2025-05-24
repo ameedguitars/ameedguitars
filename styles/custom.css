@@ -1,6 +1,6 @@
 .header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.25), rgba(33, 36, 40, 0.85), rgba(33, 36, 40, 1)),
-        url('https://baserow-backend-production20240528124524339000000001.s3.amazonaws.com/user_files/FHMomiU08RQb9D9udpcfoBzOUl45svp1_66ed03b2068fb09cf6b2a3611141fee758840530eb8194bf1dd415027fdf0a37.jpg');
+    background-image: linear-gradient(rgba(143, 154, 168, 0.25), rgba(33, 36, 40, 0.438), #212428),
+        url('/assets/body-bg.jpeg');
     background-size: 100%;
     background-repeat: no-repeat;
 
@@ -12,11 +12,15 @@ p {
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --bg-dark-translucent: rgba(33, 36, 40, 0.3) !important;
+    /* Adjust opacity as needed */
 }
+
+.bg-dark {
+    background-color: var(--bg-dark-translucent) !important;
+}
+
 
 .header-img {
     height: 300px;
@@ -29,9 +33,11 @@ p {
 }
 
 body {
-    overflow-x: clip;
     background-color: #212428 !important;
     height: 100%;
+    background-size: 100%;
+    background-repeat: repeat-y;
+
 }
 
 ul {
@@ -45,14 +51,14 @@ ul {
 }
 
 .tabs {
-    width: 100%;
-    height: 75px;
+    width: 90%;
+    height: 60px;
     margin: auto;
     display: flex;
-    box-shadow: 15px 10px 19px #1c1e22;
+    font-size: 15px;
+    box-shadow: 15px 10px 19px #1c1e22b5;
     align-items: center;
-    overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -60,12 +66,13 @@ ul {
 }
 
 .tabs li {
-    width: 25%;
+    width: 19%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
+    font-size: smaller;
     transition: .5s;
     -webkit-transition: .5s;
     -moz-transition: .5s;
@@ -74,18 +81,19 @@ ul {
     cursor: pointer;
 }
 
+
 .tabs li:hover {
-    box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     position: relative;
     z-index: 1;
     border-radius: 10px;
 }
 
 .active {
-    font-size: larger;
     font-weight: bolder;
     position: relative;
     z-index: 1;
+
+
 }
 
 .box {

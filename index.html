@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ameed Custom Guitars</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.jpg">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/bootstrap-utilities.css">
     <link rel="stylesheet" href="styles/custom.css">
@@ -13,36 +14,35 @@
 <body class="text-light">
     <div class="py-4 pb-0 text-center header" style="height:min-content">
         <div class="py-1">
-            <img src="assets/corrected.png" width="70%">
-            <div class="col-lg-6 mx-auto">
-                <p class="fs-5 mb-4">
-                    At Ameed Custom Guitars, master craftsmanship meets artistic vision in the pursuit of perfect tone.
-                    Each instrument is meticulously handcrafted with precision and passion, combining traditional
-                    techniques with innovative design to create truly unique pieces that resonate with both eye and ear.
-                    From carefully selected woods to the final setup, every element is thoughtfully considered to
-                    produce instruments that inspire musicians to reach new heights of creative expression.
-                </p>
-            </div>
+            <img src="assets/corrected.png" class="img-fluid" width="500px">
+            <p class="mx-5" style="font-size: 18px;">
+                At Ameed Custom Guitars, master craftsmanship meets artistic vision in the pursuit of perfect
+                tone.
+                From carefully selected woods to the final setup, every element is thoughtfully considered to
+                produce instruments that inspire musicians to reach new heights of creative expression.
+            </p>
+
         </div>
     </div>
 
-    <ul class="tabs nav-pills nav-fill" id="tabbar">
+    <ul class="tabs nav nav-tabs" id="tabbar">
         <li class="active" data-id="0">Guitars</li>
-        <li>About</li>
-        <li>Artists</li>
-        <li>Blog</li>
-        <li>Contact</li>
+        <li class="text-light-emphasis" data-id="1">About</li>
+        <li class="text-light-emphasis" data-id="2">Artists</li>
+        <li class="text-light-emphasis" data-id="3">Blog</li>
+        <li class="text-light-emphasis" data-id="4">Contact</li>
     </ul>
 
     <div class="container">
-        <div class="content album p-5">
-            <div class="container album" id="guitars">
+        <div class="content album">
+            <div class="container album mt-3" id="guitars">
             </div>
         </div>
 
         <div class="content py-5" style="display: none;">
             <div class="container box d-lg-flex d-block">
-                <img src="https://baserow-backend-production20240528124524339000000001.s3.amazonaws.com/user_files/WRQfkXWxQhpulxo6xmwv1zdcvGneG340_c61ee2575b8d83957215fa7f706ed2d6dbd84d14f8b5b24417bdf728110b6458.jpg" class="img-fluid" alt="">
+                <img src="https://baserow-backend-production20240528124524339000000001.s3.amazonaws.com/user_files/WRQfkXWxQhpulxo6xmwv1zdcvGneG340_c61ee2575b8d83957215fa7f706ed2d6dbd84d14f8b5b24417bdf728110b6458.jpg"
+                    class="img-fluid" alt="">
                 <div class="p-3">
                     <h3>About</h3>
                     <p class="text-light">
@@ -133,7 +133,7 @@
                     <p class="text-light">
                         The fastest way to reach out is to contact us via Instagram on
                         <a class="text-light"
-                                href="https://www.instagram.com/ameed_custom_guitars/">@ameed_custom_guitars</a></strong>
+                            href="https://www.instagram.com/ameed_custom_guitars/">@ameed_custom_guitars</a></strong>
                     </p>
                     <p class="text-light">
                         You can also contact us via <strong><a class="text-light"
@@ -143,20 +143,21 @@
 
                 <div class="container py-5 col-lg-6 mx-auto">
 
-    <div class="centered container" id="signatures">
-    </div>
+                    <div class="centered container" id="signatures">
+                    </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-    <script src="scripts/bootstrap.bundle.min.js"></script>
-    <script src="scripts/custom-styles.js"></script>
-    <script src="scripts/axios.min.js"></script>
-    <script>
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
-    </script>
-    <script src="scripts/api.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+                        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+                        crossorigin="anonymous"></script>
+                    <script src="scripts/bootstrap.bundle.min.js"></script>
+                    <script src="scripts/custom-styles.js"></script>
+                    <script src="scripts/axios.min.js"></script>
+                    <script>
+                        $('#myModal').on('shown.bs.modal', function () {
+                            $('#myInput').trigger('focus')
+                        })
+                    </script>
+                    <script src="scripts/api.js"></script>
 </body>
 
 </html>
